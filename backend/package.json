@@ -1,0 +1,35 @@
+{
+  "author": "Trần Anh Tuấn",
+  "dependencies": {
+    "@arcjet/node": "^1.0.0-beta.15",
+    "@neondatabase/serverless": "^1.0.2",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.1",
+    "pg": "^8.16.3"
+  },
+  "description": "",
+  "devDependencies": {
+    "@biomejs/biome": "2.3.10",
+    "nodemon": "^3.1.11"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "server.js",
+  "name": "backend",
+  "scripts": {
+    "check": "biome check --write",
+    "check2": "biome check --write --unsafe",
+    "dev": "nodemon server.js",
+    "format": "biome format --write",
+    "lint": "biome lint --write",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
