@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { pool } from "./config/db.js";
 import accountRoutes from "./routes/accountRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import transactionRoutes from "./routes/transactionRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(cors());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/account", accountRoutes);
+app.use("/api/transaction", transactionRoutes);
 
 // Hàm khởi tạo database - tạo các bảng cần thiết
 async function initializeDatabase() {
