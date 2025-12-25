@@ -5,6 +5,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { pool } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cors());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 // Hàm khởi tạo database - tạo các bảng cần thiết
 async function initializeDatabase() {

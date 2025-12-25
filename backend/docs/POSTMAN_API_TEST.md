@@ -1,5 +1,14 @@
 # Tài liệu Test API với Postman
 
+## Tổng quan
+
+Tài liệu này được chia thành 2 phần riêng biệt để dễ quản lý và sử dụng:
+
+1. **[POSTMAN_API_TEST_AUTH.md](./POSTMAN_API_TEST_AUTH.md)** - API Authentication (Đăng ký, Đăng nhập)
+2. **[POSTMAN_API_TEST_USER.md](./POSTMAN_API_TEST_USER.md)** - API User Management (Lấy thông tin, Đổi mật khẩu, Cập nhật thông tin)
+
+---
+
 ## Thông tin cơ bản
 
 - **Base URL**: `http://localhost:3000`
@@ -7,126 +16,37 @@
 
 ---
 
-## 1. Đăng ký (Sign Up)
+## Danh sách API
 
-### Endpoint
-```
-POST /api/auth/sign-up
-```
+### Authentication APIs
+- `POST /api/auth/sign-up` - Đăng ký tài khoản mới
+- `POST /api/auth/sign-in` - Đăng nhập và lấy token
 
-### Request Body
-```json
-{
-  "email": "user@example.com",
-  "password": "password123",
-  "firstName": "Nguyễn",
-  "lastName": "Văn A"
-}
-```
+**Xem chi tiết**: [POSTMAN_API_TEST_AUTH.md](./POSTMAN_API_TEST_AUTH.md)
 
-### Response thành công (201)
-```json
-{
-  "data": {
-    "user": {
-      "id": 1,
-      "email": "user@example.com",
-      "firstName": "Nguyễn",
-      "lastName": "Văn A",
-      "createdAt": "2024-01-01T00:00:00.000Z"
-    }
-  },
-  "message": "Đăng ký thành công",
-  "success": true
-}
-```
+### User Management APIs
+- `GET /api/user/get-user` - Lấy thông tin người dùng (yêu cầu token)
+- `POST /api/user/change-password` - Đổi mật khẩu (yêu cầu token)
+- `PUT /api/user/update-user` - Cập nhật thông tin người dùng (yêu cầu token)
 
-### Response lỗi (400/409)
-```json
-{
-  "message": "Email đã tồn tại trong hệ thống",
-  "success": false
-}
-```
+**Xem chi tiết**: [POSTMAN_API_TEST_USER.md](./POSTMAN_API_TEST_USER.md)
 
 ---
 
-## 2. Đăng nhập (Sign In)
+## Quick Start
 
-### Endpoint
-```
-POST /api/auth/sign-in
-```
-
-### Request Body
-```json
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-```
-
-### Response thành công (200)
-```json
-{
-  "data": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-    "user": {
-      "id": 1,
-      "email": "user@example.com",
-      "firstName": "Nguyễn",
-      "lastName": "Văn A"
-    }
-  },
-  "message": "Đăng nhập thành công",
-  "success": true
-}
-```
-
-### Response lỗi (401)
-```json
-{
-  "message": "Email hoặc mật khẩu không đúng",
-  "success": false
-}
-```
+1. **Đăng ký tài khoản mới**: Sử dụng API `POST /api/auth/sign-up`
+2. **Đăng nhập**: Sử dụng API `POST /api/auth/sign-in` để lấy token
+3. **Sử dụng token**: Dùng token để gọi các API User Management
 
 ---
 
-## Hướng dẫn sử dụng Postman
-
-### 1. Tạo Collection mới
-- Mở Postman → New → Collection
-- Đặt tên: `Expense Tracker API`
-
-### 2. Thiết lập Environment Variables (Tùy chọn)
-- Tạo Environment mới: `Local Development`
-- Thêm biến: `base_url` = `http://localhost:3000`
-
-### 3. Test Đăng ký
-1. Tạo request mới: `POST {{base_url}}/api/auth/sign-up`
-2. Chọn tab **Body** → **raw** → **JSON**
-3. Dán request body ở trên
-4. Click **Send**
-
-### 4. Test Đăng nhập
-1. Tạo request mới: `POST {{base_url}}/api/auth/sign-in`
-2. Chọn tab **Body** → **raw** → **JSON**
-3. Dán request body ở trên
-4. Click **Send**
-5. Copy `token` từ response để sử dụng cho các API cần xác thực
-
-### 5. Sử dụng Token cho các API được bảo vệ
-- Chọn tab **Authorization**
-- Chọn type: **Bearer Token**
-- Dán token đã copy vào ô **Token**
-
----
-
-## Lưu ý
+## Lưu ý chung
 
 - Mật khẩu phải có ít nhất 6 ký tự
 - Email phải đúng định dạng
 - Token có thời hạn 1 ngày
 - Server phải đang chạy trên port 3000
+- Các API `/api/user/*` đều yêu cầu xác thực bằng Bearer Token
+
 
