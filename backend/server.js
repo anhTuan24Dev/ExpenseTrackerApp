@@ -4,6 +4,7 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import { pool } from "./config/db.js";
+import accountRoutes from "./routes/accountRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 
@@ -19,6 +20,7 @@ app.use(cors());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/account", accountRoutes);
 
 // Hàm khởi tạo database - tạo các bảng cần thiết
 async function initializeDatabase() {
@@ -92,6 +94,9 @@ async function initializeDatabase() {
     );
     await pool.query(
       `create index if not exists idx_tblaccount_user_id on public.tblaccount(user_id);`,
+    );
+    await pool.query(
+      `create index if not exists idx_tblaccount_user_name on public.tblaccount(user_id, account_name);`,
     );
     await pool.query(
       `create index if not exists idx_tbltransaction_user_id on public.tbltransaction(user_id);`,
